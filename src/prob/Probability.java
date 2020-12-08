@@ -10,24 +10,20 @@ public class Probability {
 	private Random rand = new Random();
 	private List <Object> bag = new ArrayList <Object>();
 	
-	private int denominator;
-	
-	// Constructor fraction of a possibility ex [3/5] = 60%
-	public Probability(int numerator, int denominator) {
-		super();
-		this.denominator = denominator;
-		
-		for (int i = 0; i < numerator ; i++) {
+	public void addBag(int success, int fail) {
+		// add success rate
+		for(int i = 0; i < success; i++) {
 			bag.add(true);
 		}
-		
-		for (int i = 0; i < (denominator - numerator); i++) {
+		// add fail rate
+		for(int i = 0; i < fail; i++) {
 			bag.add(false);
 		}
 	}
-
-	public Probability() {
-		super();
+	
+	public void clearBag() {
+		// clears bag
+		bag.clear();
 	}
 	
 	public String pickProb() {
@@ -36,7 +32,7 @@ public class Probability {
 		Collections.shuffle(bag);
 		
 		// Use random to create more random  
-		if((boolean) bag.get(rand.nextInt(denominator)) == true) {
+		if((boolean) bag.get(rand.nextInt(bag.size())) == true) {
 			return "success";
 		}
 		else {
